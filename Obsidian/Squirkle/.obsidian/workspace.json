@@ -1,0 +1,230 @@
+{
+  "main": {
+    "id": "2abc8801ba2cd181",
+    "type": "split",
+    "children": [
+      {
+        "id": "788ce9fe922e994c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "eafd9bfdf882da1a",
+            "type": "leaf",
+            "state": {
+              "type": "canvas",
+              "state": {
+                "file": "Main.canvas",
+                "viewState": {
+                  "x": 4017.649910424145,
+                  "y": 3108.764418386115,
+                  "zoom": 0.20959322137705833
+                }
+              },
+              "icon": "lucide-layout-dashboard",
+              "title": "Main"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "bef3dc9dc2d53d83",
+    "type": "split",
+    "children": [
+      {
+        "id": "4c5b59509ceae55b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "48c7d64facdd12df",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "004e7a0a9526d89d",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "4f16f1b32052dae3",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c6edc7a392e5c674",
+    "type": "split",
+    "children": [
+      {
+        "id": "d7aacca45316e05e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7c23529f0b5f6a89",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Progression, Storyline.canvas",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Progression, Storyline"
+            }
+          },
+          {
+            "id": "57528edac05e9e55",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "TODO.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from TODO"
+            }
+          },
+          {
+            "id": "f068203fa6c446e9",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "119cd96691c99c88",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "cucc.canvas"
+              },
+              "icon": "lucide-list",
+              "title": "Outline of cucc"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "obsidian-kanban:Create new board": false,
+      "bases:Create new base": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "eafd9bfdf882da1a",
+  "lastOpenFiles": [
+    "Excalidraw/Drawing 2026-01-14 08.44.24.excalidraw.md",
+    "Main.canvas",
+    "Excalidraw/Drawing 2026-01-10 23.02.58.excalidraw.png",
+    "Images/Pasted image 20260110114439.png",
+    "Excalidraw/Drawing 2026-01-10 23.02.58.excalidraw.md",
+    "Excalidraw/Drawing 2026-01-10 22.48.42.excalidraw.md",
+    "Excalidraw/Drawing 2026-01-10 22.25.51.excalidraw.md",
+    "Excalidraw/Drawing 2026-01-10 17.34.45.excalidraw.md",
+    "Excalidraw/Drawing 2026-01-10 11.27.49.excalidraw.md",
+    "Images/v2.mp4",
+    "Images/Pasted Image 20251224172528_510.png",
+    "Images/Pasted image 20260109164021.png",
+    "Images/Pasted image 20260109164008.png",
+    "Images/Pasted image 20260109163952.png",
+    "Images/Pasted image 20260109162251.png",
+    "Images/Pasted image 20260109162157.png",
+    "Images/Pasted image 20260109161705.png",
+    "Images/Pasted image 20260103222917.png",
+    "Excalidraw/Drawing 2025-12-24 17.24.27.excalidraw.md",
+    "Excalidraw",
+    "Images",
+    "Untitled.md",
+    "The TODO Board.md",
+    "Progression, Storyline.canvas",
+    "Cards System.canvas",
+    "Content Dump.canvas",
+    "Marketing Strategy.canvas",
+    "Mood Board.canvas",
+    "Excalidraw/Drawing 2025-12-14 15.49.16.excalidraw.md",
+    "Excalidraw/Drawing 2025-12-10 19.47.04.excalidraw.md",
+    "Excalidraw/Drawing 2025-12-09 23.42.20.excalidraw.md",
+    "Excalidraw/Drawing 2025-12-09 23.33.10.excalidraw.md",
+    "Excalidraw/Drawing 2025-12-08 20.59.05.excalidraw.md",
+    "Excalidraw/Drawing 2025-12-07 21.32.46.excalidraw.md",
+    "Excalidraw/Drawing 2025-12-07 21.30.55.excalidraw.md",
+    "Excalidraw/Drawing 2025-11-08 13.14.24.excalidraw.md",
+    "Videos/Familiarity and too unique games - Learning from my past projects.md",
+    "Excalidraw/Drawing 2025-09-14 15.06.30.excalidraw.md",
+    "Room System.canvas",
+    "Excalidraw/Drawing 2025-09-12 20.14.03.excalidraw.md",
+    "Excalidraw/Drawing 2025-09-12 16.45.01.excalidraw.md",
+    "Excalidraw/Drawing 2025-08-21 15.38.43.excalidraw.md",
+    "Excalidraw/Drawing 2025-09-10 20.54.19.excalidraw.md",
+    "Excalidraw/Drawing 2025-09-01 15.07.11.excalidraw.md",
+    "Excalidraw/Drawing 2025-08-17 14.38.30.excalidraw.md",
+    "Videos",
+    "Combolite Feedback.canvas",
+    "Images/ssstwitter.com_1748436643589.mp4",
+    "Images/ssstwitter.com_1748436416833.mp4",
+    "Images/ssstwitter.com_1748436349345.mp4",
+    "Images",
+    "Systems",
+    "Untitled 1.canvas",
+    "PSJam16.canvas",
+    "Shorts scripts"
+  ]
+}
