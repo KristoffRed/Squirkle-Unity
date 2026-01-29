@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.coffee.softmask-for-ugui": "https://github.com/mob-sakai/SoftMaskForUGUI.git?path=Packages/src",
+    "com.coffee.ui-particle": "https://github.com/mob-sakai/ParticleEffectForUGUI.git",
     "com.unity.feature.2d": "2.0.1",
     "com.unity.ide.visualstudio": "2.0.23",
     "com.unity.inputsystem": "1.14.0",
@@ -37,6 +39,7 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
+    "com.unity.modules.xr": "1.0.0",
+    "com.unity.cinemachine": "3.1.3"
   }
 }
