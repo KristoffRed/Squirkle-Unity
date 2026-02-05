@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using Redline.Helpers;
 using Redline.Resources;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Squirkle
         public float spawnMargin = 50;
         public CursorSlash slasher;
         public GameObjectPool enemyPool;
+        public VFXPool deathVFXPool;
         public float spawnCooldown = 0.1f;
         public List<EnemyInstance> enemies = new List<EnemyInstance>();
 
@@ -40,6 +42,21 @@ namespace Squirkle
 
                 enemy.Update(slasher.weaponData, slashDamage, slashPosition, isSlashing);
             }
+
+            List<EnemyInstance> newEnemies = new List<EnemyInstance>();
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].IsDead() && !enemies[i].handledDeath)
+                {
+                    Kill(enemies[i]);
+                }
+                else
+                {
+                    newEnemies.Add(enemies[i]);
+                }
+            }  
+
+            enemies = newEnemies;
         }
 
         private void SpawnEnemy()
@@ -68,8 +85,28 @@ namespace Squirkle
 
         public void Kill(EnemyInstance enemy)
         {
+            if (enemy.handledDeath) return;
+
+            enemy.handledDeath = true;
+            SpawnDeathVFX(enemy.position, enemy.velocity);
+
+            enemy.CleanUpFX();
             enemyPool.Release(enemy.gameObject);
-            enemies.Remove(enemy);
+        }
+
+        public void SpawnDeathVFX(Vector2 position, Vector2 velocity)
+        {
+            ParticleGroup vfx = deathVFXPool.Get();
+            vfx.transform.position = position;
+            
+            // rotation
+            Vector2 direction = velocity.normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+		    vfx.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            
+            // speed
+            var fx = vfx.GetParticle(0).main;
+            fx.startSpeedMultiplier = velocity.magnitude / 2f;
         }
     }
 }

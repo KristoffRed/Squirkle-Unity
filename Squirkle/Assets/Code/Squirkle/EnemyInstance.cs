@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Redline.Helpers;
 using Redline.Resources;
@@ -7,6 +8,8 @@ namespace Squirkle
 {
     public class EnemyInstance
     {
+        public static Color baseColor = new Color32(255, 86, 66, 255);
+
         public float health = 20f;
         public float maxSpeed = 0.5f;
         public float collisionRadius = 0.5f;
@@ -14,20 +17,25 @@ namespace Squirkle
         public Transform transform => gameObject.transform;
         public SpriteRenderer spriteRenderer;
 
-        private Vector2 position => (Vector2)transform.position;
+        public Vector2 position => (Vector2)transform.position;
         private EnemySpawner spawner;
-        private Vector2 targetDirection;
-        private Vector2 velocity;
+        private Vector2 targetDirection = Vector2.zero;
+        public Vector2 velocity = Vector2.zero;
+        public bool handledDeath = false;
 
         public EnemyInstance(GameObjectPool pool, EnemySpawner _spawner)
         {
             health = 20f;
+            handledDeath = false;
 
             targetDirection = ((Vector2)GlobalHelper.RandomDirection()).normalized;
             spawner = _spawner;
             gameObject = pool.Get();
             spriteRenderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
             transform.position = spawner.GetRandomPositionOnScreen();
+
+            // fx stuff
+            spriteRenderer.color = baseColor;
         }
 
         public void Update(WeaponData weapon, DamageSource slashDamage, Vector2 slashPosition, bool isSlashing)
@@ -66,21 +74,27 @@ namespace Squirkle
             health -= source.damage;
 
             OnHitFX();
-            CheckDeath();
         }
 
         private void OnHitFX()
         {
-            Color baseColor = new Color32(255, 86, 66, 255);
             spriteRenderer.color = Color.white;
             spriteRenderer.DOColor(baseColor, 0.3f).SetDelay(0.1f);
         }
 
-        private void CheckDeath()
+        public bool IsDead()
         {
-            if (health > 0f) return;
+            return health <= 0f;
+        }
 
-            spawner.Kill(this);
+        public bool IsNull()
+        {
+            return transform == null;
+        }
+
+        public void CleanUpFX()
+        {
+            spriteRenderer.DOKill();
         }
     }
 }

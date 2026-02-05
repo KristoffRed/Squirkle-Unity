@@ -487,6 +487,7 @@ GameObject:
   - component: {fileID: 1587314416}
   - component: {fileID: 1587314418}
   - component: {fileID: 1587314417}
+  - component: {fileID: 1587314419}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -540,7 +541,24 @@ MonoBehaviour:
   spawnMargin: 50
   slasher: {fileID: 845894864}
   enemyPool: {fileID: 1587314417}
+  deathVFXPool: {fileID: 1587314419}
   spawnCooldown: 0.1
+--- !u!114 &1587314419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587314415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01dba973f80ce594ca6265f4ab566dde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6538694345748489814, guid: 6deddbf9ca9f44deca4fa5da6508aefa, type: 3}
+  defaultSize: 10
+  maxSize: 100
+  spawnedObjects: []
 --- !u!1 &2100457860
 GameObject:
   m_ObjectHideFlags: 0
