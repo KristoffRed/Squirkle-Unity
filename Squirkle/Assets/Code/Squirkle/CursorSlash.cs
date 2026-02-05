@@ -5,6 +5,7 @@ namespace Squirkle
 {
     public class CursorSlash : MonoBehaviour
     {
+        public WeaponData weaponData;
         public float slashThreshold = 1f;
         public Transform cursorParent;
         private Vector2 targetPosition;

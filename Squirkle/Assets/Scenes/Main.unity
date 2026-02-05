@@ -455,6 +455,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b55788fe491f48e58a7eb10c3437223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponData:
+    damage: 10
+    knockback: 20
   slashThreshold: 0.2
   cursorParent: {fileID: 845894865}
 --- !u!4 &845894865
@@ -534,6 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad56c3f19ba54de9a785daeaec5b25c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnMargin: 50
   slasher: {fileID: 845894864}
   enemyPool: {fileID: 1587314417}
   spawnCooldown: 0.1

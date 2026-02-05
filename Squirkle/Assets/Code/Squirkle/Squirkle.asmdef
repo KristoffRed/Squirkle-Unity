@@ -2,7 +2,8 @@
     "name": "Squirkle",
     "rootNamespace": "Squirkle",
     "references": [
-        "GUID:a5ebe9e50a65d8a47a99b95136483027"
+        "GUID:a5ebe9e50a65d8a47a99b95136483027",
+        "GUID:7971a0afbcd6b8e4d9e13ef07a7be4b1"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

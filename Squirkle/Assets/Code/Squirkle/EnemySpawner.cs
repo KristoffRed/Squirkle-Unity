@@ -31,12 +31,14 @@ namespace Squirkle
         private void UpdateEnemies()
         {
             bool isSlashing = slasher.IsSlashing();
+            Vector3 slashPosition = slasher.transform.position;
+            DamageSource slashDamage = slasher.weaponData.GetDamage(slashPosition);
 
             for (int i = 0; i < enemies.Count; i++)
             {
                 EnemyInstance enemy = enemies[i];
 
-                enemy.Update(slasher.transform.position, isSlashing);
+                enemy.Update(slasher.weaponData, slashDamage, slashPosition, isSlashing);
             }
         }
 
