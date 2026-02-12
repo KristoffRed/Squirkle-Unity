@@ -12,6 +12,7 @@ namespace Squirkle
         public CursorSlash slasher;
         public GameObjectPool enemyPool;
         public VFXPool deathVFXPool;
+        public HitmarkerManager hitmarkers;
         public float spawnCooldown = 0.1f;
         public List<EnemyData> enemyDatas = new List<EnemyData>();
         public List<EnemyInstance> enemies = new List<EnemyInstance>();

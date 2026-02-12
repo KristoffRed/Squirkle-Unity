@@ -78,18 +78,20 @@ namespace Squirkle
             damage = enemyData.resistances.ApplyToDamage(damage);
             
             // Apply critical strike
-            damage = damage.ApplyCriticalStrike(source.attackStats.critChance, source.attackStats.circleDamage);
+            damage = damage.ApplyCriticalStrike(source.attackStats.critChance, source.attackStats.critDamage);
 
             // Deal damage
             currentHealth -= damage.GetTotalDamage();
 
-            OnHitFX();
+            OnHitFX(damage);
         }
 
-        private void OnHitFX()
+        private void OnHitFX(DamageValue damage)
         {
             spriteRenderer.color = Color.white;
             spriteRenderer.DOColor(enemyData.color, 0.3f).SetDelay(0.1f);
+
+            spawner.hitmarkers.CreateHitmarker(position, damage.GetTotalDamage(), damage.isCrit ? Color.orange : Color.white);
         }
 
         public bool IsDead()
