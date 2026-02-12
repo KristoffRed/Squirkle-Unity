@@ -89,6 +89,10 @@ namespace Squirkle
         {
             if (enemy.handledDeath) return;
 
+            #if UNITY_WEBGL
+            JSBridge.OnPlayerGiveCoins(1);
+            #endif
+
             enemy.handledDeath = true;
             SpawnDeathVFX(enemy.position, enemy.velocity, enemy.enemyData.color2);
 

@@ -1,7 +1,7 @@
 mergeInto(LibraryManager.library, 
 {
-    SendGameTime: function(time) 
+    OnPlayerGiveCoins: function(coins) 
     {
-        window.dispatchReactUnityEvent("GameTime", time);
+        window.dispatchReactUnityEvent("OnPlayerGiveCoins", coins);
     }
 });
