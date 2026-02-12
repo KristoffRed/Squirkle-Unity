@@ -456,7 +456,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData:
-    damage: 10
+    name: Shortsword
+    description: Your first weapon!
+    stats:
+      circleDamage: 10
+      squareDamage: 10
+      triangleDamage: 10
+      critChance: 10
+      critDamage: 1.5
     knockback: 20
   slashThreshold: 0.2
   cursorParent: {fileID: 845894865}

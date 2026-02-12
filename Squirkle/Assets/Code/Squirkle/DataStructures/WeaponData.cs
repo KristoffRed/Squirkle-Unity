@@ -5,12 +5,14 @@ namespace Squirkle
     [System.Serializable]
     public class WeaponData
     {
-        public float damage;
+        public string name;
+        public string description;
+        public AttackStats stats;
         public float knockback;
         
         public DamageSource GetDamage(Vector2 pos)
         {
-            return new DamageSource(pos, damage, knockback);
+            return new DamageSource(pos, stats, knockback);
         }
     }
 }

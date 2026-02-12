@@ -11,6 +11,7 @@ namespace Squirkle
         public static Color baseColor = new Color32(255, 86, 66, 255);
 
         public float health = 20f;
+        public ResistanceData resistances = new ResistanceData();
         public float maxSpeed = 0.5f;
         public float collisionRadius = 0.5f;
         public GameObject gameObject;
@@ -68,10 +69,21 @@ namespace Squirkle
 
         private void Damage(DamageSource source)
         {
+            // Apply knockback
             Vector2 knockbackDirection = (position - source.pos).normalized;
             velocity += knockbackDirection * source.knockback;
             
-            health -= source.damage;
+            // Create damage data structure
+            DamageValue damage = new DamageValue(source.attackStats);
+
+            // Apply resistances
+            damage = resistances.ApplyToDamage(damage);
+            
+            // Apply critical strike
+            damage = damage.ApplyCriticalStrike(source.attackStats.critChance, source.attackStats.circleDamage);
+
+            // Deal damage
+            health -= damage.GetTotalDamage();
 
             OnHitFX();
         }

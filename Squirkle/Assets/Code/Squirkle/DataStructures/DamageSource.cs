@@ -6,13 +6,13 @@ namespace Squirkle
     public class DamageSource
     {
         public Vector2 pos;
-        public float damage;
+        public AttackStats attackStats;
         public float knockback;
         
-        public DamageSource(Vector2 _pos, float _damage, float _knockback)
+        public DamageSource(Vector2 _pos, AttackStats _attack, float _knockback)
         {
             pos = _pos;
-            damage = _damage;
+            attackStats = _attack;
             knockback = _knockback;
         }
     }
