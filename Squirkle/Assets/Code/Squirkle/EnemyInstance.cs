@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using Redline.Helpers;
 using Redline.Resources;
@@ -8,12 +7,8 @@ namespace Squirkle
 {
     public class EnemyInstance
     {
-        public static Color baseColor = new Color32(255, 86, 66, 255);
-
-        public float health = 20f;
-        public ResistanceData resistances = new ResistanceData();
-        public float maxSpeed = 0.5f;
-        public float collisionRadius = 0.5f;
+        public EnemyData enemyData;
+        public float currentHealth = 100f;
         public GameObject gameObject;
         public Transform transform => gameObject.transform;
         public SpriteRenderer spriteRenderer;
@@ -24,9 +19,10 @@ namespace Squirkle
         public Vector2 velocity = Vector2.zero;
         public bool handledDeath = false;
 
-        public EnemyInstance(GameObjectPool pool, EnemySpawner _spawner)
+        public EnemyInstance(EnemyData data, GameObjectPool pool, EnemySpawner _spawner)
         {
-            health = 20f;
+            enemyData = data;
+            currentHealth = enemyData.health;
             handledDeath = false;
 
             targetDirection = ((Vector2)GlobalHelper.RandomDirection()).normalized;
@@ -36,7 +32,9 @@ namespace Squirkle
             transform.position = spawner.GetRandomPositionOnScreen();
 
             // fx stuff
-            spriteRenderer.color = baseColor;
+            spriteRenderer.color = Color.Lerp(data.color, data.color2, Random.Range(0f, 1f));
+            spriteRenderer.sprite = data.sprite;
+            spriteRenderer.transform.localScale = Vector3.one * (data.size + Random.Range(-0.05f, 0.05f));
         }
 
         public void Update(WeaponData weapon, DamageSource slashDamage, Vector2 slashPosition, bool isSlashing)
@@ -47,7 +45,7 @@ namespace Squirkle
             {
                 float distance = Vector2.Distance(slashPosition, transform.position);
                 
-                if (distance < collisionRadius)
+                if (distance < enemyData.size)
                 {
                     Damage(slashDamage);
                 }
@@ -57,7 +55,7 @@ namespace Squirkle
         private void MoveAround()
         {
             velocity += targetDirection * 0.1f;
-            velocity = Vector2.Lerp(velocity, velocity.LimitLength(maxSpeed), Time.deltaTime * 10f);
+            velocity = Vector2.Lerp(velocity, velocity.LimitLength(enemyData.maxSpeed), Time.deltaTime * 10f);
             transform.position += (Vector3)(velocity * Time.deltaTime);
 
             if (spawner.IsOutOfBounds(position))
@@ -77,13 +75,13 @@ namespace Squirkle
             DamageValue damage = new DamageValue(source.attackStats);
 
             // Apply resistances
-            damage = resistances.ApplyToDamage(damage);
+            damage = enemyData.resistances.ApplyToDamage(damage);
             
             // Apply critical strike
             damage = damage.ApplyCriticalStrike(source.attackStats.critChance, source.attackStats.circleDamage);
 
             // Deal damage
-            health -= damage.GetTotalDamage();
+            currentHealth -= damage.GetTotalDamage();
 
             OnHitFX();
         }
@@ -91,12 +89,12 @@ namespace Squirkle
         private void OnHitFX()
         {
             spriteRenderer.color = Color.white;
-            spriteRenderer.DOColor(baseColor, 0.3f).SetDelay(0.1f);
+            spriteRenderer.DOColor(enemyData.color, 0.3f).SetDelay(0.1f);
         }
 
         public bool IsDead()
         {
-            return health <= 0f;
+            return currentHealth <= 0f;
         }
 
         public bool IsNull()

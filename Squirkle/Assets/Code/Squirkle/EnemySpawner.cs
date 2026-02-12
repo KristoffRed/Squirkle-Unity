@@ -13,6 +13,7 @@ namespace Squirkle
         public GameObjectPool enemyPool;
         public VFXPool deathVFXPool;
         public float spawnCooldown = 0.1f;
+        public List<EnemyData> enemyDatas = new List<EnemyData>();
         public List<EnemyInstance> enemies = new List<EnemyInstance>();
 
         private float timer = 0f;
@@ -61,7 +62,7 @@ namespace Squirkle
 
         private void SpawnEnemy()
         {
-            enemies.Add(new EnemyInstance(enemyPool, this));
+            enemies.Add(new EnemyInstance(enemyDatas.PickRandom(), enemyPool, this));
         }
 
         public Vector2 ScreenCornerMin() => Camera.main.ScreenToWorldPoint(new Vector2(spawnMargin, spawnMargin));
@@ -88,13 +89,13 @@ namespace Squirkle
             if (enemy.handledDeath) return;
 
             enemy.handledDeath = true;
-            SpawnDeathVFX(enemy.position, enemy.velocity);
+            SpawnDeathVFX(enemy.position, enemy.velocity, enemy.enemyData.color2);
 
             enemy.CleanUpFX();
             enemyPool.Release(enemy.gameObject);
         }
 
-        public void SpawnDeathVFX(Vector2 position, Vector2 velocity)
+        public void SpawnDeathVFX(Vector2 position, Vector2 velocity, Color color)
         {
             ParticleGroup vfx = deathVFXPool.Get();
             vfx.transform.position = position;
@@ -107,6 +108,19 @@ namespace Squirkle
             // speed
             var fx = vfx.GetParticle(0).main;
             fx.startSpeedMultiplier = velocity.magnitude / 2f;
+
+            // color
+            var col = vfx.GetParticle(0).colorOverLifetime;
+            var minMaxGradient = col.color;
+            var gradient = minMaxGradient.gradient;
+            
+            gradient.SetKeys(
+                new GradientColorKey[] { new GradientColorKey(Color.white, 0f), new GradientColorKey(color, 0.3f) },
+                gradient.alphaKeys
+            );
+
+            minMaxGradient.gradient = gradient;
+            col.color = gradient;
         }
     }
 }
