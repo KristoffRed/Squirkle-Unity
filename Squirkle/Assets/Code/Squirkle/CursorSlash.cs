@@ -1,5 +1,6 @@
 using Inputs;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Squirkle
 {
@@ -8,6 +9,8 @@ namespace Squirkle
         public float slashThreshold = 1f;
         public float abilityCooldown = 10f;
         public Transform cursorParent;
+        public Image abilityProgressImage;
+        public Image abilityCooldownImage;
         private Vector2 targetPosition;
         private Vector2 previousPosition;
 
@@ -35,6 +38,9 @@ namespace Squirkle
             cursorParent.position = Vector2.Lerp(cursorParent.position, targetPosition, Time.deltaTime * 30f);
 
             abilityCooldownTimer -= Time.deltaTime;
+            abilityProgressImage.fillAmount = Mathf.Clamp01(abilityUseTimer);
+            abilityCooldownImage.fillAmount = Mathf.Clamp01(abilityCooldownTimer / abilityCooldown);
+            abilityCooldownImage.transform.localScale = Vector3.one * Mathf.Lerp(1f, 3f, Mathf.Clamp01(abilityCooldownTimer / abilityCooldown));
 
             if (isTryingToUseAbility)
             {
