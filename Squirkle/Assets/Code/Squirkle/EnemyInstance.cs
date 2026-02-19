@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using Redline.Helpers;
 using Redline.Resources;
@@ -37,17 +38,27 @@ namespace Squirkle
             spriteRenderer.transform.localScale = Vector3.one * (data.size + Random.Range(-0.05f, 0.05f));
         }
 
-        public void Update(WeaponData weapon, DamageSource slashDamage, Vector2 slashPosition, bool isSlashing)
+        public void Update(DamageSource slashDamage, List<DamageSource> otherDamage)
         {
             MoveAround();
 
-            if (isSlashing)
+            if (slashDamage != null)
             {
-                float distance = Vector2.Distance(slashPosition, transform.position);
+                float distance = Vector2.Distance(slashDamage.pos, transform.position);
                 
-                if (distance < enemyData.size)
+                if (distance < enemyData.size + slashDamage.radius)
                 {
-                    Damage(slashDamage);
+                    Damage(slashDamage, true);
+                }
+            }
+
+            foreach (DamageSource damage in otherDamage)
+            {
+                float distance = Vector2.Distance(damage.pos, transform.position);
+                
+                if (distance < enemyData.size + damage.radius)
+                {
+                    Damage(damage, false);
                 }
             }
         }
@@ -62,10 +73,12 @@ namespace Squirkle
             {
                 velocity *= -1f;
                 targetDirection *= -1f;
+
+                spawner.ClampToBounds(transform);
             }
         }
 
-        private void Damage(DamageSource source)
+        private void Damage(DamageSource source, bool callEvents)
         {
             // Apply knockback
             Vector2 knockbackDirection = (position - source.pos).normalized;
@@ -82,6 +95,11 @@ namespace Squirkle
 
             // Deal damage
             currentHealth -= damage.GetTotalDamage();
+
+            if (callEvents)
+            {
+                AbilityEvents.onEnemyHit?.Invoke(this, damage);   
+            }
 
             OnHitFX(damage);
         }

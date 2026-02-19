@@ -550,7 +550,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331caf3bf9917485d8fcb360ace2b21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slasher: {fileID: 845894864}
 --- !u!1 &786284570
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,7 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6373066200243665101, guid: b23a1cf903345452f88af36b7518851a, type: 3}
   defaultSize: 10
-  maxSize: 100
+  maxSize: 50
   spawnedObjects: []
 --- !u!1 &845894863
 GameObject:
@@ -698,16 +697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b55788fe491f48e58a7eb10c3437223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData:
-    name: Shortsword
-    description: Your first weapon!
-    stats:
-      circleDamage: 10
-      squareDamage: 10
-      triangleDamage: 10
-      critChance: 10
-      critDamage: 1.5
-    knockback: 20
   slashThreshold: 0.2
   cursorParent: {fileID: 845894865}
 --- !u!4 &845894865
@@ -724,6 +713,62 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 530792679}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1577648035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1577648037}
+  - component: {fileID: 1577648036}
+  m_Layer: 0
+  m_Name: PlayerData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1577648036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577648035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 240f0049cdd384e49ab7908873e1ecb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultWeapon:
+    name: Default Weapon
+    description: This is the default weapon.
+    knockback: 20
+    stats:
+      circleDamage: 10
+      squareDamage: 10
+      triangleDamage: 10
+      critChance: 20
+      critDamage: 1
+      metadata:
+      - ABILITY_BURST
+--- !u!4 &1577648037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577648035}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1587314415
@@ -825,6 +870,7 @@ MonoBehaviour:
     color: {r: 1, g: 0.7955276, b: 0.19339621, a: 1}
     color2: {r: 0.9137255, g: 0.63314086, b: 0.16078432, a: 1}
     sprite: {fileID: 7482667652216324306, guid: cdb6650b0c4d64f0fb4945807b147ea7, type: 3}
+  queuedDamageSources: []
 --- !u!114 &1587314419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,7 +885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6538694345748489814, guid: 6deddbf9ca9f44deca4fa5da6508aefa, type: 3}
   defaultSize: 10
-  maxSize: 100
+  maxSize: 50
   spawnedObjects: []
 --- !u!1 &2100457860
 GameObject:
@@ -899,4 +945,5 @@ SceneRoots:
   - {fileID: 845894865}
   - {fileID: 2100457862}
   - {fileID: 1587314416}
+  - {fileID: 1577648037}
   - {fileID: 786284574}

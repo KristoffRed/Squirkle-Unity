@@ -11,5 +11,19 @@ namespace Squirkle
 
         public float critChance;
         public float critDamage;
+        public string[] metadata;
+
+        public AttackStats Clone() => (AttackStats)MemberwiseClone();
+
+        public AttackStats Multiply(float value)
+        {
+            AttackStats result = Clone();
+
+            result.circleDamage *= value;
+            result.squareDamage *= value;
+            result.triangleDamage *= value;
+
+            return result;
+        }
     }
 }

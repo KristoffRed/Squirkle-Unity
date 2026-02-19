@@ -6,14 +6,12 @@ namespace Squirkle
 {
     public class JSBridge : MonoBehaviour
     {
-        public CursorSlash slasher;
-    
         public void SetPlayerWeapon(string weaponJSON)
         {
             try
             {
                 WeaponData data = (WeaponData)JsonUtility.FromJson(weaponJSON, typeof(WeaponData));
-                slasher.weaponData = data;
+                PlayerData.weaponData = data;
 
                 Debug.Log("Successfully set player weapon!");
             }

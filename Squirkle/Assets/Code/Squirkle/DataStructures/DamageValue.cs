@@ -11,9 +11,10 @@ namespace Squirkle
 
         public DamageValue(AttackStats stats)
         {
-            circleDamage = stats.circleDamage;
-            squareDamage = stats.squareDamage;
-            triangleDamage = stats.triangleDamage;
+            float variance = Random.Range(0.8f, 1.2f);
+            circleDamage = stats.circleDamage * variance;
+            squareDamage = stats.squareDamage * variance;
+            triangleDamage = stats.triangleDamage * variance;
             isCrit = false;
         }
 

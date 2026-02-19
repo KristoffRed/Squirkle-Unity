@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Squirkle
 {
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawner : Singleton<EnemySpawner>
     {
         public float spawnMargin = 50;
         public CursorSlash slasher;
@@ -16,6 +16,8 @@ namespace Squirkle
         public float spawnCooldown = 0.1f;
         public List<EnemyData> enemyDatas = new List<EnemyData>();
         public List<EnemyInstance> enemies = new List<EnemyInstance>();
+        public List<DamageSource> queuedDamageSources = new List<DamageSource>();
+
 
         private float timer = 0f;
 
@@ -36,14 +38,17 @@ namespace Squirkle
         {
             bool isSlashing = slasher.IsSlashing();
             Vector3 slashPosition = slasher.transform.position;
-            DamageSource slashDamage = slasher.weaponData.GetDamage(slashPosition);
+            DamageSource slashDamage = isSlashing ? PlayerData.weaponData.GetDamage(slashPosition) : null;
 
             for (int i = 0; i < enemies.Count; i++)
             {
                 EnemyInstance enemy = enemies[i];
 
-                enemy.Update(slasher.weaponData, slashDamage, slashPosition, isSlashing);
+                enemy.Update(slashDamage, queuedDamageSources);
             }
+
+            // Clear damage sources
+            queuedDamageSources.Clear();
 
             List<EnemyInstance> newEnemies = new List<EnemyInstance>();
             for (int i = 0; i < enemies.Count; i++)
@@ -76,6 +81,17 @@ namespace Squirkle
 
             return pos.x < min.x || pos.y < min.y || pos.x > max.x || pos.y > max.y;
         }
+        
+        public void ClampToBounds(Transform t)
+        {
+            Vector2 min = ScreenCornerMin();
+            Vector2 max = ScreenCornerMax();
+
+            t.position = new Vector2(
+                Mathf.Clamp(t.position.x, min.x, max.x),
+                Mathf.Clamp(t.position.y, min.y, max.y)
+            );
+        }
 
         public Vector2 GetRandomPositionOnScreen()
         {
@@ -89,10 +105,11 @@ namespace Squirkle
         {
             if (enemy.handledDeath) return;
 
-            #if UNITY_WEBGL
+            #if UNITY_WEBGL && !UNITY_EDITOR
             JSBridge.OnPlayerGiveCoins(1);
             #endif
 
+            AbilityEvents.onEnemyKilled?.Invoke(enemy);
             enemy.handledDeath = true;
             SpawnDeathVFX(enemy.position, enemy.velocity, enemy.enemyData.color2);
 
