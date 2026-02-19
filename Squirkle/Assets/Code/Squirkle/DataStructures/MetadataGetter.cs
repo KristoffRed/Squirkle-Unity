@@ -10,6 +10,7 @@ namespace Squirkle
         private static WeaponMetadata[] weaponMetadataInstances = new WeaponMetadata[]
         {
             new AbilityBurst(),
+            new AbilitySmash()
         };
 
         static MetadataGetter()

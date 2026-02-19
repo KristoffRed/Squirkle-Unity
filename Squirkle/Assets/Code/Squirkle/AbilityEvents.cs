@@ -8,5 +8,6 @@ namespace Squirkle
         // Actions
         public static Action<EnemyInstance> onEnemyKilled;
         public static Action<EnemyInstance, DamageValue> onEnemyHit;
+        public static Action<Vector2> onAbilityActivated;
     }
 }

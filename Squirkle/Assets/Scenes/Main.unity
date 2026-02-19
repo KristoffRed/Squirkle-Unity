@@ -698,6 +698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slashThreshold: 0.2
+  abilityCooldown: 10
   cursorParent: {fileID: 845894865}
 --- !u!4 &845894865
 Transform:
@@ -755,6 +756,7 @@ MonoBehaviour:
       critChance: 20
       critDamage: 1
       metadata:
+      - ABILITY_SMASH
       - ABILITY_BURST
 --- !u!4 &1577648037
 Transform:
