@@ -28,5 +28,8 @@ namespace Squirkle
 
         [DllImport("__Internal")]
         public static extern void OnPlayerGiveCoins(int coins);
+        
+        [DllImport("__Internal")]
+        public static extern void OnPlayerAddItem(string itemID);
     }
 }

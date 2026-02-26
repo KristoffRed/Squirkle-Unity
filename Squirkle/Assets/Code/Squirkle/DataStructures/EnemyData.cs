@@ -9,6 +9,7 @@ namespace Squirkle
         public ResistanceData resistances = new ResistanceData();
         public float maxSpeed = 0.5f;
         public float size = 0.5f;
+        public EnemyLootTable loot;
 
         [Header("Visuals")]
         public Color color;

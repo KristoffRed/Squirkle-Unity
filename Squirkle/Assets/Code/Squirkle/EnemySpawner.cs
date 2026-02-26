@@ -140,9 +140,8 @@ namespace Squirkle
         {
             if (enemy.handledDeath) return;
 
-            #if UNITY_WEBGL && !UNITY_EDITOR
-            JSBridge.OnPlayerGiveCoins(1);
-            #endif
+            // Roll for item
+            enemy.enemyData.loot.PickRandomWeighted().Add();
 
             AbilityEvents.onEnemyKilled?.Invoke(enemy);
             enemy.handledDeath = true;
