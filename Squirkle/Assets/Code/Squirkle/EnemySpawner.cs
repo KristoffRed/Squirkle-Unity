@@ -8,18 +8,29 @@ namespace Squirkle
 {
     public class EnemySpawner : SingletonReusable<EnemySpawner>
     {
+        [Header("Config")]
         public float spawnMargin = 50;
+
+        [Header("References")]
         public CursorSlash slasher;
         public GameObjectPool enemyPool;
         public VFXPool deathVFXPool;
         public HitmarkerManager hitmarkers;
+
+        [Header("Spawner")]
         public float spawnCooldown = 0.1f;
         public float[] weights = new float[0];
         public List<EnemyData> enemyDatas = new List<EnemyData>();
+        
+        [Header("Area Boss")]
+        public float bossSpawnFrequencyMinutes = 5f;
+        public float bossSpawnOffsetSeconds = 0f;
+        public EnemyData bossData;
+
         public List<EnemyInstance> enemies = new List<EnemyInstance>();
         public List<DamageSource> queuedDamageSources = new List<DamageSource>();
 
-
+        private bool isBossAlive = false;
         private float timer = 0f;
 
         void Update()
@@ -30,6 +41,7 @@ namespace Squirkle
             {
                 timer -= spawnCooldown;
                 SpawnEnemy();
+                TrySpawnBoss();
             }
 
             UpdateEnemies();
@@ -72,6 +84,18 @@ namespace Squirkle
             enemies.Add(new EnemyInstance(enemyDatas[GlobalHelper.WeightedRandom(weights)], enemyPool, this));
         }
 
+        private void TrySpawnBoss()
+        {
+            bool isSpawnPeriod = (AreaManager.inst.GetCurrentTime() + bossSpawnOffsetSeconds) % (bossSpawnFrequencyMinutes * 60f) < 10f;
+
+            if (!isBossAlive && isSpawnPeriod)
+            {
+                Debug.Log("Boss spawned!");
+                isBossAlive = true;
+                enemies.Add(new EnemyInstance(bossData, enemyPool, this, () => isBossAlive = false));
+            }
+        }
+
         public Vector2 ScreenCornerMin() => Camera.main.ScreenToWorldPoint(new Vector2(spawnMargin, spawnMargin));
         public Vector2 ScreenCornerMax() => Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - spawnMargin, Screen.height - spawnMargin));
 
@@ -112,6 +136,8 @@ namespace Squirkle
 
             AbilityEvents.onEnemyKilled?.Invoke(enemy);
             enemy.handledDeath = true;
+            enemy.onDeath?.Invoke();
+            enemy.onDeath = null;
             SpawnDeathVFX(enemy.position, enemy.velocity, enemy.enemyData.color2);
 
             enemy.CleanUpFX();

@@ -554,7 +554,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -751,6 +751,19 @@ MonoBehaviour:
       triangleResist: 1
     maxSpeed: 1
     size: 0.45
+    color: {r: 1, g: 0.7955276, b: 0.19339621, a: 1}
+    color2: {r: 0.9137255, g: 0.63314086, b: 0.16078432, a: 1}
+    sprite: {fileID: 7482667652216324306, guid: cdb6650b0c4d64f0fb4945807b147ea7, type: 3}
+  bossSpawnFrequencyMinutes: 5
+  bossSpawnOffsetSeconds: 60
+  bossData:
+    health: 300
+    resistances:
+      circleResist: 1
+      squareResist: 0
+      triangleResist: 1
+    maxSpeed: 5
+    size: 2
     color: {r: 1, g: 0.7955276, b: 0.19339621, a: 1}
     color2: {r: 0.9137255, g: 0.63314086, b: 0.16078432, a: 1}
     sprite: {fileID: 7482667652216324306, guid: cdb6650b0c4d64f0fb4945807b147ea7, type: 3}
@@ -1087,6 +1100,19 @@ MonoBehaviour:
     color: {r: 1, g: 0.7955276, b: 0.19339621, a: 1}
     color2: {r: 0.9137255, g: 0.63314086, b: 0.16078432, a: 1}
     sprite: {fileID: 7482667652216324306, guid: cdb6650b0c4d64f0fb4945807b147ea7, type: 3}
+  bossSpawnFrequencyMinutes: 5
+  bossSpawnOffsetSeconds: 30
+  bossData:
+    health: 500
+    resistances:
+      circleResist: 1
+      squareResist: 0
+      triangleResist: 1
+    maxSpeed: 0.5
+    size: 2
+    color: {r: 1, g: 0.37154338, b: 0.2971698, a: 1}
+    color2: {r: 0.9339623, g: 0.24483652, b: 0.16300285, a: 1}
+    sprite: {fileID: 7482667652216324306, guid: 41a5004e49a454d5392449496d0fa98a, type: 3}
   queuedDamageSources: []
 --- !u!1 &1055673923
 GameObject:
@@ -1323,6 +1349,19 @@ MonoBehaviour:
     color: {r: 1, g: 0.7955276, b: 0.19339621, a: 1}
     color2: {r: 0.9137255, g: 0.63314086, b: 0.16078432, a: 1}
     sprite: {fileID: 7482667652216324306, guid: cdb6650b0c4d64f0fb4945807b147ea7, type: 3}
+  bossSpawnFrequencyMinutes: 5
+  bossSpawnOffsetSeconds: 0
+  bossData:
+    health: 500
+    resistances:
+      circleResist: 1
+      squareResist: 0
+      triangleResist: 1
+    maxSpeed: 0.1
+    size: 2
+    color: {r: 0.6264741, g: 0.33333337, b: 1, a: 1}
+    color2: {r: 0.4697274, g: 0.17221431, b: 0.8490566, a: 1}
+    sprite: {fileID: -2413806693520163455, guid: 1b9c3bf971bae49569af0f9427e601e8, type: 3}
   queuedDamageSources: []
 --- !u!114 &1587314419
 MonoBehaviour:

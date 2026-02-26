@@ -14,7 +14,7 @@ namespace Squirkle
         {
             AttackStats playerAttack = PlayerData.weaponData.stats;
 
-            DamageSource aoe = new DamageSource(enemy.position, playerAttack.Multiply(0.1f), 30f, 1.5f);
+            DamageSource aoe = new DamageSource(enemy.position, playerAttack.Multiply(0.1f), 30f, 1.5f, true);
             EnemySpawner.inst.queuedDamageSources.Add(aoe);
         }
     }

@@ -17,10 +17,14 @@ namespace Squirkle
         public Vector2 position => (Vector2)transform.position;
         private EnemySpawner spawner;
         private Vector2 targetDirection = Vector2.zero;
+        private float iframeTimer = 0f;
+        private Tween fxTween;
         public Vector2 velocity = Vector2.zero;
         public bool handledDeath = false;
 
-        public EnemyInstance(EnemyData data, GameObjectPool pool, EnemySpawner _spawner)
+        public System.Action onDeath = null;
+
+        public EnemyInstance(EnemyData data, GameObjectPool pool, EnemySpawner _spawner, System.Action _onDeath = null)
         {
             enemyData = data;
             currentHealth = enemyData.health;
@@ -36,17 +40,20 @@ namespace Squirkle
             spriteRenderer.color = Color.Lerp(data.color, data.color2, Random.Range(0f, 1f));
             spriteRenderer.sprite = data.sprite;
             spriteRenderer.transform.localScale = Vector3.one * (data.size + Random.Range(-0.05f, 0.05f));
+
+            onDeath = _onDeath;
         }
 
         public void Update(DamageSource slashDamage, List<DamageSource> otherDamage)
         {
+            iframeTimer -= Time.deltaTime;
             MoveAround();
 
             if (slashDamage != null)
             {
                 float distance = Vector2.Distance(slashDamage.pos, transform.position);
                 
-                if (distance < enemyData.size + slashDamage.radius)
+                if (distance < enemyData.size + slashDamage.radius && spawner.slasher.GetSpeed() > enemyData.size / 2f)
                 {
                     Damage(slashDamage, true);
                 }
@@ -80,6 +87,8 @@ namespace Squirkle
 
         private void Damage(DamageSource source, bool callEvents)
         {
+            if (iframeTimer > 0f && !source.ignoreIFrames) return;
+
             // Apply knockback
             Vector2 knockbackDirection = (position - source.pos).normalized;
             velocity += knockbackDirection * source.knockback;
@@ -101,13 +110,16 @@ namespace Squirkle
                 AbilityEvents.onEnemyHit?.Invoke(this, damage);   
             }
 
+            if (!source.ignoreIFrames) iframeTimer = 0.1f;
+
             OnHitFX(damage);
         }
 
         private void OnHitFX(DamageValue damage)
         {
+            fxTween?.Kill();
             spriteRenderer.color = Color.white;
-            spriteRenderer.DOColor(enemyData.color, 0.3f).SetDelay(0.1f);
+            fxTween = spriteRenderer.DOColor(enemyData.color, 0.3f).SetDelay(0.1f);
 
             spawner.hitmarkers.CreateHitmarker(position, damage.GetTotalDamage(), damage.isCrit ? Color.orange : Color.white);
         }

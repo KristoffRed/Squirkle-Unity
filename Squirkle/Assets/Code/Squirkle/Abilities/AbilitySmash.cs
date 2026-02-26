@@ -13,7 +13,7 @@ namespace Squirkle
         public void Perform(Vector2 pos)
         {
             AttackStats playerAttack = PlayerData.weaponData.stats;
-            DamageSource aoe = new DamageSource(pos, playerAttack.Multiply(3f), 40f, 2f);
+            DamageSource aoe = new DamageSource(pos, playerAttack.Multiply(3f), 40f, 2f, true);
 
             EnemySpawner.inst.queuedDamageSources.Add(aoe);
         }

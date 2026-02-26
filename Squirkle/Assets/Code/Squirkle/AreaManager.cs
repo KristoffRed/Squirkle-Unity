@@ -22,14 +22,21 @@ namespace Squirkle
             LoadArea(0);
         }
 
+        public float GetCurrentTime() => JSBridge.baseTime + Time.time;
+
         public void LoadArea(int areaIndex)
         {
-            if (areaIndex < 0 || areaIndex >= areas.Count) return;
+            if (areaIndex < 0 || areaIndex >= areas.Count)
+            {
+                Debug.LogError($"Area ID: {areaIndex} is out of bounds!");
+                return;
+            }
 
             if (currentArea != -1) areas[currentArea].Disable();
             areas[areaIndex].Enable();
 
             currentArea = areaIndex;
+            Debug.Log($"Area {areaIndex} loaded!");
         }
 
         private void LoadNext() => LoadArea(currentArea + 1);
