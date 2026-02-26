@@ -30,8 +30,16 @@ namespace Squirkle
         public List<EnemyInstance> enemies = new List<EnemyInstance>();
         public List<DamageSource> queuedDamageSources = new List<DamageSource>();
 
-        private bool isBossAlive = false;
+        private EnemyInstance currentBoss = null;
         private float timer = 0f;
+
+        public override void OnEnable()
+        {
+            base.OnEnable();
+
+            if (currentBoss != null) BossHealthBar.inst.Show(currentBoss);
+            else BossHealthBar.inst.Hide();
+        }
 
         void Update()
         {
@@ -88,11 +96,13 @@ namespace Squirkle
         {
             bool isSpawnPeriod = (AreaManager.inst.GetCurrentTime() + bossSpawnOffsetSeconds) % (bossSpawnFrequencyMinutes * 60f) < 10f;
 
-            if (!isBossAlive && isSpawnPeriod)
+            if (currentBoss == null && isSpawnPeriod)
             {
                 Debug.Log("Boss spawned!");
-                isBossAlive = true;
-                enemies.Add(new EnemyInstance(bossData, enemyPool, this, () => isBossAlive = false));
+                currentBoss = new EnemyInstance(bossData, enemyPool, this, () => currentBoss = null);
+                enemies.Add(currentBoss);
+
+                BossHealthBar.inst.Show(currentBoss);
             }
         }
 
