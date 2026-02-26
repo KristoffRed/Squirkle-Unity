@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Squirkle
 {
-    public class EnemySpawner : Singleton<EnemySpawner>
+    public class EnemySpawner : SingletonReusable<EnemySpawner>
     {
         public float spawnMargin = 50;
         public CursorSlash slasher;
@@ -14,6 +14,7 @@ namespace Squirkle
         public VFXPool deathVFXPool;
         public HitmarkerManager hitmarkers;
         public float spawnCooldown = 0.1f;
+        public float[] weights = new float[0];
         public List<EnemyData> enemyDatas = new List<EnemyData>();
         public List<EnemyInstance> enemies = new List<EnemyInstance>();
         public List<DamageSource> queuedDamageSources = new List<DamageSource>();
@@ -68,7 +69,7 @@ namespace Squirkle
 
         private void SpawnEnemy()
         {
-            enemies.Add(new EnemyInstance(enemyDatas.PickRandom(), enemyPool, this));
+            enemies.Add(new EnemyInstance(enemyDatas[GlobalHelper.WeightedRandom(weights)], enemyPool, this));
         }
 
         public Vector2 ScreenCornerMin() => Camera.main.ScreenToWorldPoint(new Vector2(spawnMargin, spawnMargin));
